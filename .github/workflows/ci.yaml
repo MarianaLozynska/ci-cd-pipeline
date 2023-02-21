@@ -1,0 +1,25 @@
+name: CI
+on:
+  pull_request:
+    branches: [develop]
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          # Default: ${{ github.token }}
+          token: ${{ secrets.ACTION_GITHUB_TOKEN }}
+          # Number of commits to fetch. 0 indicates all history for all branches and tags.
+          # Default: 1
+          fetch-depth: 0
+      - name: use NodeJS
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
+      - run: npm install
+      - run: npm test -- --coverage
+        env:
+          CI: true
