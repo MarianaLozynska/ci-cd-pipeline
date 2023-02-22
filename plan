@@ -1,18 +1,2 @@
-1. create .github folder with workflows folder
-2. create a new repository ci-cd-pipeline
-3. create develop branch
-4. add protection rules to both branches
-5. craete new feature branch to build workflows
-6. create the Develop Pull Request Workflow (when opened PR to merge in develop branch):
-   6.1. install dependecies
-   6.2. run automated tests
-   <!-- 6.3. uplode code coverage as an Artifact
-   6.4. cache dependencies -->
-7. create the Develop Merge Pull Request Workflow
-   7.1. install dependencies
-   7.2. run automated tests
-   7.3. uplode code coverage as an Artifact
-   7.4. build Project
-   7.5. upload build as an Artifact
-   7.6. deploy to staging server
-   7.7. cache dependencies
+create a new repository
+create .github folder with workflows folder
