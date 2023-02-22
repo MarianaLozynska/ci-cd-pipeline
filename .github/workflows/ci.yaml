@@ -2,6 +2,8 @@ name: CI
 on:
   pull_request:
     branches: [develop]
+  push:
+    branches: [develop]
 
 jobs:
   build:
@@ -12,7 +14,7 @@ jobs:
         # with:
         #   token: ${{ secrets.ACTION_GITHUB_TOKEN }}
         #   fetch-depth: 0
-      - name: use NodeJS
+      - name: Use NodeJS
         uses: actions/setup-node@v1
         with:
           node-version: "12.x"
@@ -20,3 +22,14 @@ jobs:
       - run: npm test -- --coverage
         env:
           CI: true
+      - name: Build project
+        # run only on push events
+        if: github.event_name = 'push'
+        run: npm run build
+      - name: Deploy to Staging
+        if: github.event_name = 'push'
+        # install and run surge
+        run: npx sugre --project ./build --domain my-pipeline-ci-cd.surge.sh
+        env:
+          SURGE_LOGIN: ${{secrets.SURGE_LOGIN}}
+          SURGE_TOKEN: ${{secrets.SURGE_TOKEN}}
