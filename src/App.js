@@ -6,7 +6,8 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={pipeline} className="App-logo" alt="logo" />
-        <p>CI/CD Pipeline working</p>
+        <p>CI/CD Pipeline</p>
+        <p>Version 0.0.1</p>
         <a
           className="CI/CD-link"
           href="https://en.wikipedia.org/wiki/CI/CD"
