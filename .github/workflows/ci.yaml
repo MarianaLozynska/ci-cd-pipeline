@@ -56,14 +56,6 @@ jobs:
         with:
           name: build
           path: build
-      - name: Deploy to Staging
-        if:
-          github.event_name == 'push'
-          # install and run surge
-        run: npx surge --project ./build --domain my-pipeline-ci-cd.surge.sh
-        env:
-          SURGE_LOGIN: ${{secrets.SURGE_LOGIN}}
-          SURGE_TOKEN: ${{secrets.SURGE_TOKEN}}
       - name: Create Release
         if: "contains(github.event.head_commit.message, 'release')"
         uses: actions/create-release@v1
@@ -72,3 +64,11 @@ jobs:
         with:
           tag_name: ${{ steps.versioning.outputs.version }}
           release_name: ${{ steps.versioning.outputs.version }}
+      - name: Deploy to Staging
+        if:
+          github.event_name == 'push'
+          # install and run surge
+        run: npx surge --project ./build --domain my-pipeline-ci-cd.surge.sh
+        env:
+          SURGE_LOGIN: ${{secrets.SURGE_LOGIN}}
+          SURGE_TOKEN: ${{secrets.SURGE_TOKEN}}
