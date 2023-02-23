@@ -11,6 +11,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          # Default: ${{ github.token }}
+          token: ${{ secrets.ACTION_GITHUB_TOKEN }}
+          # Number of commits to fetch. 0 indicates all history for all branches and tags.
+          # Default: 1
+          fetch-depth: 0
 
       - name: Cache node_modules
         uses: actions/cache@v3
@@ -39,7 +45,7 @@ jobs:
 
       - name: Semantic versioning
         id: versioning
-        uses: PaulHatch/semantic-version@v4.0.2
+        uses: PaulHatch/semantic-version@v5.0.2
         with:
           branch: main
           # The prefix to use to identify tags
