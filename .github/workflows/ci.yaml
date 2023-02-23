@@ -37,29 +37,29 @@ jobs:
           name: code-coverage
           path: coverage
 
-      - name: Semantic versioning
-        id: versioning
-        uses: PaulHatch/semantic-version@v4.0.2
-        with:
-          branch: main
-          # The prefix to use to identify tags
-          tag_prefix: "v"
-          major_pattern: "BREAKING CHANGE:"
-          minor_pattern: "feat:"
-          patch_pattern:
-            "fix:"
-            # A string to determine the format of the version output
-          format: "v${major}.${minor}.${patch}"
+      # - name: Semantic versioning
+      #   id: versioning
+      #   uses: PaulHatch/semantic-version@v4.0.2
+      #   with:
+      #     branch: main
+      #     # The prefix to use to identify tags
+      #     tag_prefix: "v"
+      #     major_pattern: "BREAKING CHANGE:"
+      #     minor_pattern: "feat:"
+      #     patch_pattern:
+      #       "fix:"
+      #       # A string to determine the format of the version output
+      #     format: "v${major}.${minor}.${patch}"
 
-      - name: Create Release
-        # if: "contains(github.event.head_commit.message, 'release')"
-        uses: actions/create-release@v1
-        # env:
-        with:
-          GITHUB_TOKEN: ${{ secrets.ACTION_GITHUB_TOKEN}}
-          # with:
-          tag_name: ${{ steps.versioning.outputs.version }}
-          release_name: ${{ steps.versioning.outputs.version }}
+      # - name: Create Release
+      #   # if: "contains(github.event.head_commit.message, 'release')"
+      #   uses: actions/create-release@v1
+      #   # env:
+      #   with:
+      #     GITHUB_TOKEN: ${{ secrets.ACTION_GITHUB_TOKEN}}
+      #     # with:
+      #     tag_name: ${{ steps.versioning.outputs.version }}
+      #     release_name: ${{ steps.versioning.outputs.version }}
 
       - name: Build project
         # run only on push events
