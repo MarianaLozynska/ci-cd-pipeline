@@ -6,8 +6,8 @@
 6. create the Develop Pull Request Workflow (when opened PR to merge in develop branch):
    6.1. install dependecies
    6.2. run automated tests
-   <!-- 6.3. uplode code coverage as an Artifact
-   6.4. cache dependencies -->
+   6.3. uplode code coverage as an Artifact
+   6.4. cache dependencies
 7. create the Develop Merge Pull Request Workflow
    7.1. install dependencies
    7.2. run automated tests
@@ -15,4 +15,14 @@
    7.4. build Project
    7.5. upload build as an Artifact
    7.6. deploy to staging server
+   7.7. cache dependencies
+8. create the Main Pull Request Workflow (when opened PR to merge in Master branch):
+   8.1. install dependencies
+   8.2. run automated tests
+   8.3. uplode code coverage as an Artifact
+   8.4. build Project
+   8.5. upload build as an Artifact
+   8.6. create a Release
+   8.7. deploy to production server
+   8.8. upload coverage to Codecov
    7.7. cache dependencies
