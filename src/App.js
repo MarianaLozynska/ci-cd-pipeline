@@ -7,7 +7,7 @@ function App() {
       <header className="App-header">
         <img src={pipeline} className="App-logo" alt="logo" />
         {/* <p>CI/CD Pipeline</p> */}
-        <p>Semantic release is not working :-( </p>
+        <p>Release:</p>
         <a
           className="CI/CD-link"
           href="https://en.wikipedia.org/wiki/CI/CD"

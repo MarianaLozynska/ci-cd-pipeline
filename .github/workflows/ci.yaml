@@ -7,17 +7,18 @@ on:
 
 jobs:
   build:
+    permissions: write-all
     runs-on: ubuntu-20.04
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-        with:
-          # Default: ${{ github.token }}
-          token: ${{ secrets.ACTION_GITHUB_TOKEN }}
-          # Number of commits to fetch. 0 indicates all history for all branches and tags.
-          # Default: 1
-          fetch-depth: 0
+        # with:
+        #   # Default: ${{ github.token }}
+        #   token: ${{ secrets.ACTION_GITHUB_TOKEN }}
+        # Number of commits to fetch. 0 indicates all history for all branches and tags.
+        # Default: 1
+        # fetch-depth: 0
 
       - name: Cache node_modules
         uses: actions/cache@v3
@@ -58,14 +59,14 @@ jobs:
             # A string to determine the format of the version output
           format: "v${major}.${minor}.${patch}"
 
-      # - name: Create Release
-      #   # if: "contains(github.event.head_commit.message, 'release')"
-      #   uses: actions/create-release@v1
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.ACTION_GITHUB_TOKEN}}
-      #   with:
-      #     tag_name: ${{ steps.versioning.outputs.version }}
-      #     release_name: ${{ steps.versioning.outputs.version }}
+      - name: Create Release
+        # if: "contains(github.event.head_commit.message, 'release')"
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
+        with:
+          tag_name: ${{ steps.versioning.outputs.version }}
+          release_name: ${{ steps.versioning.outputs.version }}
 
       - name: Build project
         # run only on push events
