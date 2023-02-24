@@ -40,7 +40,7 @@ jobs:
           path: coverage
 
       - name: Semantic versioning
-        if: github.event_name == 'push'
+        # if: github.event_name == 'push'
         id: versioning
         uses: PaulHatch/semantic-version@v4.0.2
         with:
@@ -55,8 +55,8 @@ jobs:
           format: "v${major}.${minor}.${patch}"
 
       - name: Create Release
-        if: github.event_name == 'push'
-        # if: "contains(github.event.head_commit.message, 'release')"
+        # if: github.event_name == 'push'
+        if: "contains(github.event.head_commit.message, 'release')"
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
