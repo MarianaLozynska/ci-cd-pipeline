@@ -58,14 +58,14 @@ jobs:
             # A string to determine the format of the version output
           format: "v${major}.${minor}.${patch}"
 
-      # - name: Create Release
-      #   # if: "contains(github.event.head_commit.message, 'release')"
-      #   uses: actions/create-release@v1
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.ACTION_GITHUB_TOKEN}}
-      #   with:
-      #     tag_name: ${{ steps.versioning.outputs.version }}
-      #     release_name: ${{ steps.versioning.outputs.version }}
+      - name: Create Release
+        # if: "contains(github.event.head_commit.message, 'release')"
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.ACTION_GITHUB_TOKEN}}
+        with:
+          tag_name: ${{ steps.versioning.outputs.version }}
+          release_name: ${{ steps.versioning.outputs.version }}
 
       - name: Build project
         # run only on push events
