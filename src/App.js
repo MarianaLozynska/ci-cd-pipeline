@@ -8,7 +8,7 @@ function App() {
         <img src={pipeline} className="App-logo" alt="logo" />
         <p>CI/CD Pipeline Practicing</p>
         <p>Release: v 0.2.4</p>
-        {/* <p>I want to see: Release: v0.1.0</p> */}
+        <p>Versioning working!!!</p>
         <a
           className="CI/CD-link"
           href="https://en.wikipedia.org/wiki/CI/CD"
