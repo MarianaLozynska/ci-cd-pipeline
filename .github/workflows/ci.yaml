@@ -91,6 +91,6 @@ jobs:
 
       - name: Deploy to Production
         if:
-          github.event_name == 'pull_request' && github.ref == 'refs/heads/develop'
+          github.event_name == 'pull_request' && github.ref == 'refs/heads/main'
           # install and run surge
         run: npx surge --project ./build --domain production-my-pipeline-ci-cd.surge.sh
