@@ -1,9 +1,9 @@
 name: CI
 on:
   pull_request:
-    branches: [develop]
+    branches: [develop, main]
   push:
-    branches: [develop]
+    branches: [develop, main]
 
 jobs:
   build:
@@ -39,6 +39,43 @@ jobs:
           name: code-coverage
           path: coverage
 
+      # - name: Semantic versioning
+      #   # if: github.event_name == 'push'
+      #   id: versioning
+      #   uses: PaulHatch/semantic-version@v4.0.2
+      #   with:
+      #     branch: main
+      #     # The prefix to use to identify tags
+      #     tag_prefix: "v"
+      #     major_pattern: "BREAKING CHANGE:"
+      #     minor_pattern: "feat:"
+      #     patch_pattern:
+      #       "fix:"
+      #       # A string to determine the format of the version output
+      #     format: "v${major}.${minor}.${patch}"
+
+      # - name: Create Release
+      #   if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      #   # if: "contains(github.event.head_commit.message, 'release')"
+      #   uses: actions/create-release@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
+      #   with:
+      #     tag_name: ${{ steps.versioning.outputs.version }}
+      #     release_name: ${{ steps.versioning.outputs.version }}
+
+      - name: Build project
+        # run only on push events
+        if: github.event_name == 'push'
+        run: npm run build
+
+      - name: Upload Build folder
+        if: github.event_name == 'push'
+        uses: actions/upload-artifact@v3
+        with:
+          name: build
+          path: build
+
       - name: Semantic versioning
         # if: github.event_name == 'push'
         id: versioning
@@ -63,18 +100,6 @@ jobs:
         with:
           tag_name: ${{ steps.versioning.outputs.version }}
           release_name: ${{ steps.versioning.outputs.version }}
-
-      - name: Build project
-        # run only on push events
-        if: github.event_name == 'push'
-        run: npm run build
-
-      - name: Upload Build folder
-        if: github.event_name == 'push'
-        uses: actions/upload-artifact@v3
-        with:
-          name: build
-          path: build
 
       - name: Deploy to Staging
         if:
