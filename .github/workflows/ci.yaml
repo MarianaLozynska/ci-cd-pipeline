@@ -57,7 +57,7 @@ jobs:
       - name: Semantic versioning
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         id: versioning
-        uses: PaulHatch/semantic-version@v4.0.2
+        uses: PaulHatch/semantic-version@v5.0.2
         with:
           branch: main
           # The prefix to use to identify tags
