@@ -1,9 +1,9 @@
 name: CI
 on:
   pull_request:
-    branches: [develop, main]
+    branches: [develop]
   push:
-    branches: [develop, main]
+    branches: [develop]
 
 jobs:
   build:
@@ -23,7 +23,7 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Use NodeJS
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: "19.x"
 
