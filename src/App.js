@@ -7,7 +7,7 @@ function App() {
       <header className="App-header">
         <img src={pipeline} className="App-logo" alt="logo" />
         <p>CI/CD Pipeline Practicing</p>
-        <p>Release: v 0.2.6</p>
+        <p>Release: v 0.2.7</p>
         <p>Versioning working!!! :-) </p>
         <a
           className="CI/CD-link"
