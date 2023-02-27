@@ -3,7 +3,7 @@ on:
   pull_request:
     branches: ["develop", "main"]
   push:
-    branches: ["main"]
+    branches: ["develop", "main"]
 
 jobs:
   build:
@@ -59,7 +59,7 @@ jobs:
         id: versioning
         uses: PaulHatch/semantic-version@v5.0.2
         with:
-          branch: main
+          # branch: main
           # The prefix to use to identify tags
           tag_prefix: "v"
           major_pattern: "BREAKING CHANGE:"
@@ -69,16 +69,15 @@ jobs:
             # A string to determine the format of the version output
           format: "v${major}.${minor}.${patch}"
 
-      - name: Create Release
-        if: github.event_name == 'push'
-        # if: "contains(github.event.head_commit.message, 'release')"
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
-        with:
-          tag_name: ${{ steps.versioning.outputs.version }}
-          release_name: ${{ steps.versioning.outputs.version }}
-
+      # - name: Create Release
+      #   if: github.event_name == 'push'
+      #   # if: "contains(github.event.head_commit.message, 'release')"
+      #   uses: actions/create-release@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
+      #   with:
+      #     tag_name: ${{ steps.versioning.outputs.version }}
+      #     release_name: ${{ steps.versioning.outputs.version }}
       - name: Deploy to Staging
         if:
           github.event_name == 'push'
