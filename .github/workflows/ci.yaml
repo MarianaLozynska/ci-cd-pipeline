@@ -55,7 +55,7 @@ jobs:
           path: build
 
       - name: Semantic versioning
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        if: github.event_name == 'push'
         id: versioning
         uses: PaulHatch/semantic-version@v5.0.2
         with:
@@ -70,7 +70,7 @@ jobs:
           format: "v${major}.${minor}.${patch}"
 
       - name: Create Release
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        if: github.event_name == 'push'
         # if: "contains(github.event.head_commit.message, 'release')"
         uses: actions/create-release@v1
         env:
