@@ -82,15 +82,15 @@ jobs:
           path: build
 
       - name: Deploy to Staging
-        if:
-          github.event_name == 'push' && github.ref == 'refs/heads/develop'
-          # && github.ref == 'refs/heads/develop'
-          # install and run surge
+        # if:
+        # github.event_name == 'push' && github.ref == 'refs/heads/develop'
+        # && github.ref == 'refs/heads/develop'
+        # install and run surge
         run: npx surge --project ./build --domain my-pipeline-ci-cd.surge.sh
         # run: npx surge --project ./build --domain production-my-pipeline-ci-cd.surge.sh
 
       - name: Deploy to Production
         if:
-          github.event_name == 'pull_request' && github.ref == 'refs/heads/main'
+          github.event_name == 'push' && github.ref == 'refs/heads/develop'
           # install and run surge
         run: npx surge --project ./build --domain production-my-pipeline-ci-cd.surge.sh
