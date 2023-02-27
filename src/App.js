@@ -6,9 +6,11 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={pipeline} className="App-logo" alt="logo" />
-        <p>CI/CD Pipeline Practicing</p>
+        {/* <p>CI/CD Pipeline Practicing</p> */}
         <p>Release: v 0.2.8</p>
         <p>Versioning working!!! :-) </p>
+        <p>Staging working!!! :-) </p>
+        <p>Production not working!!! :-( </p>
         <a
           className="CI/CD-link"
           href="https://en.wikipedia.org/wiki/CI/CD"
