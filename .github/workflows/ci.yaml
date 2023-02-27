@@ -42,6 +42,19 @@ jobs:
           name: code-coverage
           path: coverage
 
+      #
+      - name: Build project
+        # run only on push events
+        if: github.event_name == 'push'
+        run: npm run build
+
+      - name: Upload Build folder
+        if: github.event_name == 'push'
+        uses: actions/upload-artifact@v3
+        with:
+          name: build
+          path: build
+
       - name: Semantic versioning
         # if: github.event_name == 'push'
         id: versioning
@@ -66,18 +79,6 @@ jobs:
         with:
           tag_name: ${{ steps.versioning.outputs.version }}
           release_name: ${{ steps.versioning.outputs.version }}
-      #
-      - name: Build project
-        # run only on push events
-        if: github.event_name == 'push'
-        run: npm run build
-
-      - name: Upload Build folder
-        if: github.event_name == 'push'
-        uses: actions/upload-artifact@v3
-        with:
-          name: build
-          path: build
 
       - name: Deploy to Staging
         if:
