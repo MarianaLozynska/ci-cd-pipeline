@@ -56,7 +56,7 @@ jobs:
           path: build
 
       - name: Semantic versioning
-        # if: github.event_name == 'push'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         id: versioning
         uses: PaulHatch/semantic-version@v4.0.2
         with:
